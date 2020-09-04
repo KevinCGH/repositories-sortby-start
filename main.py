@@ -56,15 +56,6 @@ def main():
     l = len(uris)
     printProgress(i, l, barLength=50)
 
-    # for uri in read_uri_from_file():
-    #     i += 1
-    #     value, success = spider_data(uri)
-    #     if success:
-    #         result_list.append(value)
-    #     else:
-    #         fail_list.append(value)
-    #     printProgress(i, l, barLength=50)
-
     # thread
     with ThreadPoolExecutor(max_workers=10) as executor:
         future_tasks = [executor.submit(spider_data, url, client_id, client_secret)
@@ -79,7 +70,8 @@ def main():
             printProgress(i, l, barLength=50)
     # wait(future_tasks, return_when=ALL_COMPLETED)
     t2 = time.time()
-    print('Cost Time: {0:.2f}s'.format(t2-t1))
+    print('Compiled successfully in {0:.2f}s'.format(t2-t1))
+    print('Statistics Time {}'.format())
     result_list.sort(key=lambda x: x["star"], reverse=True)
     print("Success: {}\n".format(len(result_list)))
     for item in result_list:
